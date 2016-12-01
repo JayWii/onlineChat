@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>首页</title>
+</head>
+<body>
+  <h1>hello express</h1>
+  <input type="text" name="" value="" id="input">
+  <button id="btn">发送消息</button>
+  <div class="msgs"></div>
+
+  <script src="/resources/public/js/socket.io.min.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    var socket = io.connect();
+    var btn = document.getElementById('btn');
+    var input = document.getElementById('input');
+    var displayP = document.getElementsByClassName('msgs')[0];
+
+    btn.onclick = function () {
+      socket.emit('chat Msg',input.value);
+    }
+
+    socket.on('chat Msg', function(data){
+      var p = document.createElement('p');
+      p.textContent = data;
+      displayP.appendChild(p);
+    })
+
+  </script>
+</body>
+</html>
